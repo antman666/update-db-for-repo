@@ -8,6 +8,6 @@ for i in ${urls[*]}; do
 		pkg=$(echo $i|awk -F '/' '{print$7}')
 		echo Downloading $pkg
 		wget -q https://github.com/$i -P kernels/
-		repo-add kernels.db.tar.gz ./kernels/$pkg
+		repo-add -p kernels.db.tar.gz ./kernels/$pkg
 done
 
