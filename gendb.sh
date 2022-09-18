@@ -7,7 +7,7 @@ urls=$(curl "https://api.github.com/repos/antman666/own_repo/releases/latest" -s
 for i in ${urls[*]}; do 
 		pkg=$(echo $i | awk -F '/' '{print $9}')
 		echo Downloading ${pkg%?}
-		wget -q https://github.com/$i -P own-repo/
+		wget -q ${i//\"/} -P own-repo/
 done
 
 repo-add -p own-repo.db.tar.gz ./own-repo/*.zst
