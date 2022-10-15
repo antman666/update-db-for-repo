@@ -1,13 +1,13 @@
 #!/bin/bash
 
-mkdir action -p
+mkdir action-repo -p
 
-urls=$(curl https://github.com/antman666/action-tool/releases/tag/x86_64 -s|grep "/antman666/action-tool/releases/download/x86_64/"|awk -F '"|"' '{print$2}')
+urls=$(curl "https://api.github.com/repos/antman666/action-repo/releases/latest" -s | grep browser_download_url | awk '{print $2}')
 
 for i in ${urls[*]}; do 
   db=$(echo $i|awk -F '/' '{print$7}')
   echo Downloading $db
-  wget -q https://github.com/$i -P action
+  wget -q https://github.com/$i -P action-repo
 done
 
-repo-add -p action.db.tar.gz ./action/*.zst
+repo-add -p action-repo.db.tar.gz ./action-repo/*.zst
