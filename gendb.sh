@@ -7,7 +7,7 @@ urls=$(curl "https://api.github.com/repos/antman666/action-repo/releases/latest"
 for i in ${urls[*]}; do 
   db=$(echo $i|awk -F '/' '{print$9}')
   echo Downloading $db
-  wget -c ${i//\"/} -P action-repo
+  wget -q ${i//\"/} -P action-repo
 done
 
 repo-add -p action-repo.db.tar.gz ./action-repo/*.zst
